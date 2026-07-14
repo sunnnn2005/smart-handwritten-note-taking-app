@@ -13,8 +13,11 @@ struct NotebookView: View {
                             .foregroundStyle(.secondary)
                     } else {
                         ForEach(store.outline) { entry in
-                            Button(entry.title) {
+                            Button {
                                 store.selectPage(entry.pageID)
+                            } label: {
+                                Text(entry.title)
+                                    .padding(.leading, CGFloat(entry.level - 1) * 12)
                             }
                         }
                     }
@@ -59,7 +62,7 @@ struct NotebookView: View {
             guard let heading else {
                 return
             }
-            store.replaceOutlineEntry(for: page.id, title: heading)
+            store.replaceOutlineEntry(for: page.id, title: heading.title, level: heading.level)
         }
     }
 }

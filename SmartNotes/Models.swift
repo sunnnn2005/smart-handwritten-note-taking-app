@@ -17,4 +17,5 @@ struct OutlineEntry: Identifiable {
     let id: UUID
     let pageID: UUID
     let title: String
+    let level: Int
 }

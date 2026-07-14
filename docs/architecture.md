@@ -21,7 +21,8 @@ Path: `SmartNotes/`
 
 Path: `Sources/SmartNotesCore/`
 
-- `HeadingParser.swift` normalizes OCR text and extracts headings marked with `#`.
+- `HeadingParser.swift` normalizes OCR text and extracts headings marked with
+  `#`, `##`, or `###`.
 - This layer is intentionally UI-independent so it can be tested with `swift test`.
 
 ### Testing Layer
@@ -36,7 +37,8 @@ Path: `Tests/SmartNotesCoreTests/`
 1. User writes on a PencilKit canvas.
 2. App converts the `PKDrawing` into an image.
 3. Vision OCR returns candidate text observations.
-4. `HeadingParser` scans recognized text for lines starting with `#`.
+4. `HeadingParser` scans recognized text for lines starting with heading markers
+   such as `#`, full-width `＃`, or OCR fallback `♯`.
 5. The app creates or updates an outline entry for the current page.
 6. User taps the outline entry to jump back to that page.
 
@@ -48,3 +50,5 @@ Path: `Tests/SmartNotesCoreTests/`
   later by storing bounding boxes from Vision OCR.
 - OCR correction is not in the MVP, but the architecture can support editable
   outline titles later.
+- The parser supports three heading levels so the table of contents can grow
+  from a flat page list into a nested outline.

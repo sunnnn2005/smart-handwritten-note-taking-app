@@ -25,7 +25,7 @@ and a workflow designed around a real student pain point.
 - Create a notebook
 - Add handwritten pages with Apple Pencil
 - Save pages locally
-- Detect handwritten headings that begin with `#`
+- Detect handwritten headings that begin with `#`, `##`, or `###`
 - Generate a table of contents from detected headings
 - Tap a heading to jump to the matching page
 - Testable heading parsing logic in `SmartNotesCore`
@@ -40,6 +40,8 @@ and a workflow designed around a real student pain point.
 - Implemented outline-based navigation that maps detected headings to note pages,
   allowing users to jump between handwritten sections without manually typing
   titles.
+- Built a testable heading parser that normalizes OCR variants such as full-width
+  hash marks and supports multi-level table-of-contents entries.
 
 ## Suggested Xcode Setup
 

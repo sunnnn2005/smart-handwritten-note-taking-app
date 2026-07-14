@@ -21,6 +21,26 @@ final class HeadingParserTests: XCTestCase {
         XCTAssertEqual(heading?.title, "Probability Theory")
     }
 
+    func testSupportsMusicalSharpOcrFallback() {
+        let heading = HeadingParser.parse(from: ["♯ Linear Algebra"])
+
+        XCTAssertEqual(heading?.title, "Linear Algebra")
+    }
+
+    func testParsesHeadingLevels() {
+        let heading = HeadingParser.parse(from: ["### Model Evaluation"])
+
+        XCTAssertEqual(heading?.title, "Model Evaluation")
+        XCTAssertEqual(heading?.level, 3)
+    }
+
+    func testParseAllReturnsMultipleHeadingsInOrder() {
+        let headings = HeadingParser.parseAll(from: ["# Data Cleaning", "notes", "## Outliers"])
+
+        XCTAssertEqual(headings.map(\.title), ["Data Cleaning", "Outliers"])
+        XCTAssertEqual(headings.map(\.level), [1, 2])
+    }
+
     func testIgnoresEmptyHeadingMarker() {
         let heading = HeadingParser.parse(from: ["#   "])
 

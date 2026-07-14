@@ -37,8 +37,19 @@ final class NotebookStore: ObservableObject {
         selectedPageID = pageID
     }
 
-    func replaceOutlineEntry(for pageID: UUID, title: String) {
+    func replaceOutlineEntry(for pageID: UUID, title: String, level: Int = 1) {
         outline.removeAll { $0.pageID == pageID }
-        outline.append(OutlineEntry(id: UUID(), pageID: pageID, title: title))
+        outline.append(OutlineEntry(id: UUID(), pageID: pageID, title: title, level: level))
+        outline.sort { first, second in
+            pageIndex(for: first.pageID) < pageIndex(for: second.pageID)
+        }
+
+        if let pageIndex = pages.firstIndex(where: { $0.id == pageID }) {
+            pages[pageIndex].title = title
+        }
+    }
+
+    private func pageIndex(for pageID: UUID) -> Int {
+        pages.firstIndex { $0.id == pageID } ?? Int.max
     }
 }

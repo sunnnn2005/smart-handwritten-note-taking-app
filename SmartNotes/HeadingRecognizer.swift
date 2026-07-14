@@ -5,7 +5,7 @@ import UIKit
 import SmartNotesCore
 
 enum HeadingRecognizer {
-    static func recognizeHeading(from drawing: PKDrawing, completion: @escaping (String?) -> Void) {
+    static func recognizeHeading(from drawing: PKDrawing, completion: @escaping (ParsedHeading?) -> Void) {
         let image = drawing.image(from: drawing.bounds, scale: 2.0)
         guard let cgImage = image.cgImage else {
             completion(nil)
@@ -15,10 +15,10 @@ enum HeadingRecognizer {
         let request = VNRecognizeTextRequest { request, _ in
             let observations = request.results as? [VNRecognizedTextObservation] ?? []
             let candidates = observations.compactMap { $0.topCandidates(1).first?.string }
-            let heading = HeadingParser.parse(from: candidates)?.title
+            let heading = HeadingParser.parse(from: candidates)
 
             DispatchQueue.main.async {
-                completion(heading?.isEmpty == false ? heading : nil)
+                completion(heading)
             }
         }
 
