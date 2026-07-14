@@ -43,15 +43,24 @@ and a workflow designed around a real student pain point.
 - Built a testable heading parser that normalizes OCR variants such as full-width
   hash marks and supports multi-level table-of-contents entries.
 
-## Suggested Xcode Setup
+## Run on iPad
 
-1. Open `Package.swift` in Xcode to inspect and test `SmartNotesCore`.
-2. Create a new iOS app in Xcode named `SmartNotes`.
-3. Choose SwiftUI as the interface.
-4. Add the files in `SmartNotes/` to the Xcode project.
-5. Add the local package target `SmartNotesCore` to the app target.
-6. Run on an iPad simulator or physical iPad. Apple Pencil testing works best on
-   a real device.
+The repository includes `SmartNotes.xcodeproj`, which contains:
+
+- `SmartNotes`: the iOS app target
+- `SmartNotesCore`: the reusable heading parser framework
+
+To test on a real iPad:
+
+1. Open `SmartNotes.xcodeproj` in Xcode.
+2. Select the `SmartNotes` scheme.
+3. Connect your iPad with USB or use Xcode wireless debugging.
+4. In the project signing settings, choose your Apple ID team.
+5. Select your iPad as the run destination.
+6. Press Run.
+
+Apple Pencil testing works best on a real iPad. The simulator can compile the
+app, but it cannot fully validate the handwriting workflow.
 
 ## Local Verification
 
@@ -68,9 +77,17 @@ swift test
 ```
 
 Note: `SmartNotes/` contains the iPad app layer and should be compiled from an
-Xcode iOS app target. The Swift package focuses on UI-independent heading
-parsing logic so the most important OCR parsing behavior can be tested without
-an iPad simulator.
+Xcode iOS app target. `SmartNotes.xcodeproj` is included for running the app on
+simulator or device. The Swift package focuses on UI-independent heading parsing
+logic so the most important OCR parsing behavior can be tested without an iPad
+simulator.
+
+Build the iOS app target without code signing:
+
+```bash
+xcodebuild -project SmartNotes.xcodeproj -scheme SmartNotes -configuration Debug -sdk iphonesimulator -destination 'generic/platform=iOS Simulator' CODE_SIGNING_ALLOWED=NO build
+xcodebuild -project SmartNotes.xcodeproj -scheme SmartNotes -configuration Debug -sdk iphoneos -destination 'generic/platform=iOS' CODE_SIGNING_ALLOWED=NO build
+```
 
 ## Architecture
 

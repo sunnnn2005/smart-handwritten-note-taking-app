@@ -1,11 +1,12 @@
 import Foundation
 import PencilKit
-import Vision
+@preconcurrency import Vision
 import UIKit
 import SmartNotesCore
 
 enum HeadingRecognizer {
-    static func recognizeHeading(from drawing: PKDrawing, completion: @escaping (ParsedHeading?) -> Void) {
+    @MainActor
+    static func recognizeHeading(from drawing: PKDrawing, completion: @MainActor @escaping (ParsedHeading?) -> Void) {
         let image = drawing.image(from: drawing.bounds, scale: 2.0)
         guard let cgImage = image.cgImage else {
             completion(nil)
@@ -17,7 +18,7 @@ enum HeadingRecognizer {
             let candidates = observations.compactMap { $0.topCandidates(1).first?.string }
             let heading = HeadingParser.parse(from: candidates)
 
-            DispatchQueue.main.async {
+            Task { @MainActor in
                 completion(heading)
             }
         }
