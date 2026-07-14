@@ -2,6 +2,7 @@ import Foundation
 import PencilKit
 import Vision
 import UIKit
+import SmartNotesCore
 
 enum HeadingRecognizer {
     static func recognizeHeading(from drawing: PKDrawing, completion: @escaping (String?) -> Void) {
@@ -14,10 +15,7 @@ enum HeadingRecognizer {
         let request = VNRecognizeTextRequest { request, _ in
             let observations = request.results as? [VNRecognizedTextObservation] ?? []
             let candidates = observations.compactMap { $0.topCandidates(1).first?.string }
-            let heading = candidates
-                .map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
-                .first { $0.hasPrefix("#") }
-                .map { String($0.dropFirst()).trimmingCharacters(in: .whitespacesAndNewlines) }
+            let heading = HeadingParser.parse(from: candidates)?.title
 
             DispatchQueue.main.async {
                 completion(heading?.isEmpty == false ? heading : nil)

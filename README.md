@@ -17,6 +17,7 @@ and a workflow designed around a real student pain point.
 - SwiftUI
 - PencilKit
 - Vision OCR
+- Swift Package Manager
 - Core Data or SwiftData
 
 ## MVP Features
@@ -27,6 +28,7 @@ and a workflow designed around a real student pain point.
 - Detect handwritten headings that begin with `#`
 - Generate a table of contents from detected headings
 - Tap a heading to jump to the matching page
+- Testable heading parsing logic in `SmartNotesCore`
 
 ## Resume Bullets
 
@@ -41,11 +43,36 @@ and a workflow designed around a real student pain point.
 
 ## Suggested Xcode Setup
 
-1. Create a new iOS app in Xcode named `SmartNotes`.
-2. Choose SwiftUI as the interface.
-3. Add the files in `SmartNotes/` to the Xcode project.
-4. Run on an iPad simulator or physical iPad. Apple Pencil testing works best on
+1. Open `Package.swift` in Xcode to inspect and test `SmartNotesCore`.
+2. Create a new iOS app in Xcode named `SmartNotes`.
+3. Choose SwiftUI as the interface.
+4. Add the files in `SmartNotes/` to the Xcode project.
+5. Add the local package target `SmartNotesCore` to the app target.
+6. Run on an iPad simulator or physical iPad. Apple Pencil testing works best on
    a real device.
+
+## Local Verification
+
+Build the core package:
+
+```bash
+swift build
+```
+
+Run core tests:
+
+```bash
+swift test
+```
+
+Note: `SmartNotes/` contains the iPad app layer and should be compiled from an
+Xcode iOS app target. The Swift package focuses on UI-independent heading
+parsing logic so the most important OCR parsing behavior can be tested without
+an iPad simulator.
+
+## Architecture
+
+See `docs/architecture.md` for the app layers, OCR flow, and design tradeoffs.
 
 ## Project Roadmap
 
