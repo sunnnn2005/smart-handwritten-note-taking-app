@@ -9,6 +9,13 @@ final class HeadingParserTests: XCTestCase {
         XCTAssertEqual(heading, ParsedHeading(title: "Regression Analysis", rawText: "# Regression Analysis"))
     }
 
+    func testParsesHashWithoutSpace() {
+        let outlineTag = OutlineParser.parseOutlineTag(from: "#Unit 1")
+
+        XCTAssertEqual(outlineTag?.title, "Unit 1")
+        XCTAssertEqual(outlineTag?.level, 1)
+    }
+
     func testTrimsWhitespaceAroundHeading() {
         let heading = HeadingParser.parse(from: ["   # Lecture 5   "])
 
@@ -43,6 +50,12 @@ final class HeadingParserTests: XCTestCase {
 
     func testIgnoresEmptyHeadingMarker() {
         let heading = HeadingParser.parse(from: ["#   "])
+
+        XCTAssertNil(heading)
+    }
+
+    func testIgnoresMoreThanThreeLevels() {
+        let heading = HeadingParser.parse(from: ["#### Too Deep"])
 
         XCTAssertNil(heading)
     }

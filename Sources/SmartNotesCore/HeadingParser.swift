@@ -12,7 +12,9 @@ public struct ParsedHeading: Equatable, Sendable {
     }
 }
 
-public enum HeadingParser {
+public typealias ParsedOutlineTag = ParsedHeading
+
+public enum OutlineParser {
     public static func parse(from recognizedLines: [String]) -> ParsedHeading? {
         parseAll(from: recognizedLines).first
     }
@@ -30,13 +32,21 @@ public enum HeadingParser {
             .trimmingCharacters(in: .whitespacesAndNewlines)
     }
 
+    public static func parseOutlineTag(from text: String) -> ParsedOutlineTag? {
+        extractHeading(from: normalize(text))
+    }
+
     private static func extractHeading(from line: String) -> ParsedHeading? {
         guard line.hasPrefix("#") else {
             return nil
         }
 
         let markerCount = line.prefix { $0 == "#" }.count
-        let level = min(markerCount, 3)
+        guard markerCount > 0 && markerCount <= 3 else {
+            return nil
+        }
+
+        let level = markerCount
         let title = line
             .dropFirst(markerCount)
             .trimmingCharacters(in: .whitespacesAndNewlines)
@@ -48,3 +58,5 @@ public enum HeadingParser {
         return ParsedHeading(title: title, rawText: line, level: level)
     }
 }
+
+public typealias HeadingParser = OutlineParser

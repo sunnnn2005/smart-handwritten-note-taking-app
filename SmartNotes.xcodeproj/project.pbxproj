@@ -51,7 +51,7 @@
 		111111111111111111111006 /* HeadingRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeadingRecognizer.swift; sourceTree = "<group>"; };
 		111111111111111111111007 /* HeadingParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeadingParser.swift; sourceTree = "<group>"; };
 		111111111111111111111008 /* SmartNotesCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SmartNotesCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		111111111111111111111009 /* SmartNotes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SmartNotes.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		111111111111111111111009 /* IndexNote.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IndexNote.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,7 +106,7 @@
 		111111111111111111111013 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				111111111111111111111009 /* SmartNotes.app */,
+				111111111111111111111009 /* IndexNote.app */,
 				111111111111111111111008 /* SmartNotesCore.framework */,
 			);
 			name = Products;
@@ -130,7 +130,7 @@
 			);
 			name = SmartNotes;
 			productName = SmartNotes;
-			productReference = 111111111111111111111009 /* SmartNotes.app */;
+			productReference = 111111111111111111111009 /* IndexNote.app */;
 			productType = "com.apple.product-type.application";
 		};
 		111111111111111111111302 /* SmartNotesCore */ = {
@@ -339,13 +339,19 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
+				DEVELOPMENT_TEAM = DWC9W34QV9;
 				DEVELOPMENT_ASSET_PATHS = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = SmartNotes;
+				INFOPLIST_KEY_CFBundleDisplayName = IndexNote;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
+				INFOPLIST_KEY_NSCameraUsageDescription = "IndexNote uses the camera only when you choose to scan a document into your notes.";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "IndexNote uses the microphone only when you choose to add an audio marker to a note.";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "IndexNote can save exported note images to your photo library when you choose to share or export them.";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "IndexNote can import images from your photo library when you choose to add them to a note.";
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -355,8 +361,8 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.shunlu.SmartNotes;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.shunlu.IndexNote;
+				PRODUCT_NAME = IndexNote;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 6.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -367,12 +373,18 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
+				DEVELOPMENT_TEAM = DWC9W34QV9;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = SmartNotes;
+				INFOPLIST_KEY_CFBundleDisplayName = IndexNote;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
+				INFOPLIST_KEY_NSCameraUsageDescription = "IndexNote uses the camera only when you choose to scan a document into your notes.";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "IndexNote uses the microphone only when you choose to add an audio marker to a note.";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "IndexNote can save exported note images to your photo library when you choose to share or export them.";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "IndexNote can import images from your photo library when you choose to add them to a note.";
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -382,8 +394,8 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.shunlu.SmartNotes;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.shunlu.IndexNote;
+				PRODUCT_NAME = IndexNote;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 6.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -393,8 +405,10 @@
 		111111111111111111111805 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = DWC9W34QV9;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -413,8 +427,10 @@
 		111111111111111111111806 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = DWC9W34QV9;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
